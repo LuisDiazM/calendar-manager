@@ -11,6 +11,7 @@ import (
 func CreateApp() *app.Application {
 	wire.Build(AppProvider,
 		EnvironmentVariablesProvider,
+		HTTPServerProvider,
 	)
 	return new(app.Application)
 }
