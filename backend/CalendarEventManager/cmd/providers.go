@@ -20,3 +20,4 @@ var UsersUsecasesProvider = wire.NewSet(users.NewUsersUsecase)
 
 // repositories
 var UsersRepositoryProvider = wire.NewSet(usersRepo.NewUsersRepository)
+var UsersRepositoryReaderProvider = wire.NewSet(usersRepo.NewUsersRepositoryReader)

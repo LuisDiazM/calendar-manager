@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"reflect"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
@@ -24,5 +25,19 @@ func CreateUser(usersUsecase *users.UsersUsecase) gin.HandlerFunc {
 			return
 		}
 		ctx.JSON(http.StatusCreated, user)
+	}
+}
+
+func GetUserById(usersUsecase *users.UsersUsecase) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		id := ctx.Param("id")
+		user, _ := usersUsecase.GetUsersUsecase.FindUserById(id)
+		isEmpty := reflect.DeepEqual(user, entities.Users{})
+		if isEmpty {
+			ctx.JSON(http.StatusNoContent, nil)
+			return
+		} else {
+			ctx.JSON(http.StatusOK, user)
+		}
 	}
 }

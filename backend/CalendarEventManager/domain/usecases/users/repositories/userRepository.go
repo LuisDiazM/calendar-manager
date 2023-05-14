@@ -5,3 +5,7 @@ import "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usec
 type CreateUserRepository interface {
 	CreateUser(user entities.Users) error
 }
+
+type GetUserRepository interface {
+	GetUserById(id string) (*entities.Users, error)
+}

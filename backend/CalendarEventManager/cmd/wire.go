@@ -15,6 +15,7 @@ func CreateApp() *app.Application {
 		DatabaseProvider,
 		UsersUsecasesProvider,
 		UsersRepositoryProvider,
+		UsersRepositoryReaderProvider,
 	)
 	return new(app.Application)
 }

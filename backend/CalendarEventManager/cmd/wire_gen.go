@@ -22,7 +22,8 @@ func CreateApp() *app.Application {
 	engine := server.NewHTTPServer()
 	databaseGateway := database.NewDatabaseImp()
 	createUserRepository := repositories.NewUsersRepository(databaseGateway)
-	usersUsecase := usecases.NewUsersUsecase(createUserRepository)
+	getUserRepository := repositories.NewUsersRepositoryReader(databaseGateway)
+	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository)
 	application := app.NewApplication(env, engine, databaseGateway, usersUsecase)
 	return application
 }
