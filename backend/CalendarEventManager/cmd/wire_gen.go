@@ -8,7 +8,10 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/repositories"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 )
 
@@ -17,6 +20,9 @@ import (
 func CreateApp() *app.Application {
 	env := config.NewEnvironmentsSpecification()
 	engine := server.NewHTTPServer()
-	application := app.NewApplication(env, engine)
+	databaseGateway := database.NewDatabaseImp()
+	createUserRepository := repositories.NewUsersRepository(databaseGateway)
+	usersUsecase := usecases.NewUsersUsecase(createUserRepository)
+	application := app.NewApplication(env, engine, databaseGateway, usersUsecase)
 	return application
 }

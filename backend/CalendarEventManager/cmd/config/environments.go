@@ -7,7 +7,12 @@ import (
 )
 
 type Env struct {
-	PORT int `mapstructure:"PORT"`
+	SERVER_PORT       int    `mapstructure:"SERVER_PORT"`
+	POSTGRES_PASSWORD string `mapstructure:"POSTGRES_PASSWORD"`
+	POSTGRES_USER     string `mapstructure:"POSTGRES_USER"`
+	POSTGRES_DB       string `mapstructure:"POSTGRES_DB"`
+	POSTGRES_PORT     string `mapstructure:"POSTGRES_PORT"`
+	POSTGRES_HOST     string `mapstructure:"POSTGRES_HOST"`
 }
 
 func NewEnvironmentsSpecification() *Env {
