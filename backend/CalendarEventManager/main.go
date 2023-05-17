@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server/routes"
 )
 
@@ -14,6 +15,7 @@ func main() {
 	app := cmd.CreateApp()
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM)
 	defer cancel()
+	server.EnableCors(app)
 	routes.SetUpRoutes(app)
 	err := app.Start(ctx)
 	if err != nil {
