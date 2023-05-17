@@ -1,20 +1,16 @@
 <div class="container">
+  <button mat-icon-button class="logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
   <div class="content">
-    <img src="../../../../assets/images/calendar.png" alt="Italian Trulli" />
+    <img src="../../../../assets/images/calendar.png" alt="calendar" />
 
     <h1>Bienvenido al módulo de calendarios</h1>
     <h4>Ingrese en su cuenta de google para continuar</h4>
   </div>
-  <div class="login">
-    <div>
-      <asl-google-signin-button
-        type="standard"
-        size="large"
-        text="signin_with"
-      ></asl-google-signin-button>
-    </div>
-
+  <div class="login" *ngIf="!isLogged">
     <div *ngIf="!isLogged">
+      Ingresar
       <asl-google-signin-button
         type="standard"
         size="large"
@@ -22,4 +18,5 @@
       ></asl-google-signin-button>
     </div>
   </div>
+
 </div>
