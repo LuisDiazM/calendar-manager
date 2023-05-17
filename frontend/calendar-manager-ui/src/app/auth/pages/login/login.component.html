@@ -1,16 +1,25 @@
 <div class="container">
-    <h2>Inicio de Sesión</h2>
-    <form>
-      <div class="form-group">
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="form-group">
-        <button type="submit">Iniciar Sesión</button>
-      </div>
-    </form>
+  <div class="content">
+    <img src="../../../../assets/images/calendar.png" alt="Italian Trulli" />
+
+    <h1>Bienvenido al módulo de calendarios</h1>
+    <h4>Ingrese en su cuenta de google para continuar</h4>
   </div>
+  <div class="login">
+    <div>
+      <asl-google-signin-button
+        type="standard"
+        size="large"
+        text="signin_with"
+      ></asl-google-signin-button>
+    </div>
+
+    <div *ngIf="!isLogged">
+      <asl-google-signin-button
+        type="standard"
+        size="large"
+        text="signup_with"
+      ></asl-google-signin-button>
+    </div>
+  </div>
+</div>
