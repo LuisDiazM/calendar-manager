@@ -7,6 +7,7 @@ import (
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
+	meetingsRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
 	usersRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
@@ -26,4 +27,4 @@ var MeetingUsecaseProvider = wire.NewSet(meetings.NewMeetingUsecases)
 var UsersRepositoryProvider = wire.NewSet(usersRepo.NewUsersRepository)
 var UsersRepositoryReaderProvider = wire.NewSet(usersRepo.NewUsersRepositoryReader)
 var UsersRepositoryUpdateProvider = wire.NewSet(usersRepo.NewUsersRepositoryUpdate)
-var MeetingRepositoryCreateProvider = wire.NewSet()
+var MeetingRepositoryCreateProvider = wire.NewSet(meetingsRepo.NewWriteMeetingRepository)

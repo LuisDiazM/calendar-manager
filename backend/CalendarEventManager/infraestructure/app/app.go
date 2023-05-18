@@ -24,7 +24,11 @@ type Application struct {
 	MeetingsUsecase *meetings.MeetingsUsecase
 }
 
-func NewApplication(configVars *config.Env, webServer *gin.Engine, database database.DatabaseGateway, usersUsecase *users.UsersUsecase, meetingUsecase *meetings.MeetingsUsecase) *Application {
+func NewApplication(configVars *config.Env,
+	webServer *gin.Engine,
+	database database.DatabaseGateway,
+	usersUsecase *users.UsersUsecase,
+	meetingUsecase *meetings.MeetingsUsecase) *Application {
 	return &Application{
 		Env:             configVars,
 		WebServer:       webServer,

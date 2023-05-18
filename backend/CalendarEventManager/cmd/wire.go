@@ -13,10 +13,14 @@ func CreateApp() *app.Application {
 		EnvironmentVariablesProvider,
 		HTTPServerProvider,
 		DatabaseProvider,
+
 		UsersUsecasesProvider,
+		MeetingUsecaseProvider,
+
 		UsersRepositoryProvider,
 		UsersRepositoryReaderProvider,
 		UsersRepositoryUpdateProvider,
+		MeetingRepositoryCreateProvider,
 	)
 	return new(app.Application)
 }

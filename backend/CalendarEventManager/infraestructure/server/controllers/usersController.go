@@ -14,7 +14,7 @@ func CreateUser(usersUsecase *users.UsersUsecase) gin.HandlerFunc {
 		var user entities.Users
 		err := ctx.BindJSON(&user)
 		if err != nil {
-			ctx.JSON(http.StatusBadRequest, nil)
+			ctx.JSON(http.StatusBadRequest, err)
 			return
 		}
 		err = usersUsecase.CreateUserUsecase.InsertUser(user)

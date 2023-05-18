@@ -8,9 +8,11 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
+	usecases2 "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 )
@@ -25,6 +27,8 @@ func CreateApp() *app.Application {
 	getUserRepository := users.NewUsersRepositoryReader(databaseGateway)
 	updateUserRepository := users.NewUsersRepositoryUpdate(databaseGateway)
 	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository, updateUserRepository)
-	application := app.NewApplication(env, engine, databaseGateway, usersUsecase)
+	writeMeetingRepository := meetings.NewWriteMeetingRepository(databaseGateway)
+	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository)
+	application := app.NewApplication(env, engine, databaseGateway, usersUsecase, meetingsUsecase)
 	return application
 }
