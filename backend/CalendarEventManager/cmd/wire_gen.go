@@ -28,7 +28,8 @@ func CreateApp() *app.Application {
 	updateUserRepository := users.NewUsersRepositoryUpdate(databaseGateway)
 	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository, updateUserRepository)
 	writeMeetingRepository := meetings.NewWriteMeetingRepository(databaseGateway)
-	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository)
+	readMeetingRepository := meetings.NewReadMeetingRepo(databaseGateway)
+	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository, readMeetingRepository)
 	application := app.NewApplication(env, engine, databaseGateway, usersUsecase, meetingsUsecase)
 	return application
 }

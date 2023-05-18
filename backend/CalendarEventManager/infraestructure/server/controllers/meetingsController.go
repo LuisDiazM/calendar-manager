@@ -57,3 +57,15 @@ func DeleteMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc
 		ctx.JSON(http.StatusNoContent, nil)
 	}
 }
+
+func ReadByIdMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		id := ctx.Param("id")
+		meeting, _ := usecases.ReadMeeting.FindMeetingById(id)
+		if meeting != nil {
+			ctx.JSON(http.StatusOK, meeting)
+		} else {
+			ctx.JSON(http.StatusNoContent, nil)
+		}
+	}
+}

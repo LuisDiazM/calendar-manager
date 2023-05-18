@@ -4,8 +4,10 @@ import respositories "github.com/LuisDiazM/calendar-manager/calendar-event-manag
 
 type MeetingsUsecase struct {
 	CreateMeeting *WriteMeeting
+	ReadMeeting   *ReadMeeting
 }
 
-func NewMeetingUsecases(createRepo respositories.WriteMeetingRepository) *MeetingsUsecase {
-	return &MeetingsUsecase{CreateMeeting: NewCreateMeeting(createRepo)}
+func NewMeetingUsecases(createRepo respositories.WriteMeetingRepository, readMeetingRepo respositories.ReadMeetingRepository) *MeetingsUsecase {
+	return &MeetingsUsecase{CreateMeeting: NewCreateMeeting(createRepo),
+		ReadMeeting: NewReadMeeting(readMeetingRepo)}
 }

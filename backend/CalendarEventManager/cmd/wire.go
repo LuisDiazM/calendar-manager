@@ -21,6 +21,7 @@ func CreateApp() *app.Application {
 		UsersRepositoryReaderProvider,
 		UsersRepositoryUpdateProvider,
 		MeetingRepositoryCreateProvider,
+		MeetRepositoryReadProvider,
 	)
 	return new(app.Application)
 }
