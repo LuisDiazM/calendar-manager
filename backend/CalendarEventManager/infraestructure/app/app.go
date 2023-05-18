@@ -5,26 +5,32 @@ import (
 	"fmt"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
-	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
+	meetingEntities "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
+	userEntities "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/entities"
+
+	meetings "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
+	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
+
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"
 )
 
 type Application struct {
-	Env          *config.Env
-	WebServer    *gin.Engine
-	Database     database.DatabaseGateway
-	UsersUsecase *users.UsersUsecase
+	Env             *config.Env
+	WebServer       *gin.Engine
+	Database        database.DatabaseGateway
+	UsersUsecase    *users.UsersUsecase
+	MeetingsUsecase *meetings.MeetingsUsecase
 }
 
-func NewApplication(configVars *config.Env, webServer *gin.Engine, database database.DatabaseGateway, usersUsecase *users.UsersUsecase) *Application {
+func NewApplication(configVars *config.Env, webServer *gin.Engine, database database.DatabaseGateway, usersUsecase *users.UsersUsecase, meetingUsecase *meetings.MeetingsUsecase) *Application {
 	return &Application{
-		Env:          configVars,
-		WebServer:    webServer,
-		Database:     database,
-		UsersUsecase: usersUsecase,
+		Env:             configVars,
+		WebServer:       webServer,
+		Database:        database,
+		UsersUsecase:    usersUsecase,
+		MeetingsUsecase: meetingUsecase,
 	}
 }
 
@@ -42,5 +48,5 @@ func (app *Application) Start(ctx context.Context) error {
 }
 
 func (app *Application) Migrations() {
-	app.Database.DB().AutoMigrate(&entities.Users{})
+	app.Database.DB().AutoMigrate(&meetingEntities.Meetings{}, &userEntities.Users{})
 }

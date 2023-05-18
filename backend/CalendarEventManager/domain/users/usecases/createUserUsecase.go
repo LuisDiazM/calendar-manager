@@ -1,8 +1,8 @@
 package usecases
 
 import (
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/repositories"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/entities"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/repositories"
 )
 
 type CreateUser struct {

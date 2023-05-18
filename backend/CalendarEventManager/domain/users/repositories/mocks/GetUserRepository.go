@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	entities "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
+	entities "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/entities"
 	mock "github.com/stretchr/testify/mock"
 )
 

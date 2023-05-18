@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"reflect"
 
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
-	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/entities"
+	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 	"github.com/gin-gonic/gin"
 )
 

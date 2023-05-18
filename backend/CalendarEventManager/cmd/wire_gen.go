@@ -8,10 +8,10 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/repositories/users"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 )
 

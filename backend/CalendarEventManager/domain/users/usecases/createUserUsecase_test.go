@@ -3,8 +3,8 @@ package usecases
 import (
 	"testing"
 
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/repositories/mocks"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/entities"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/repositories/mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )
