@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-card class="form-registry-user">
+    <mat-card-content>
+      <h1>Información del usuario</h1>
+      <form [formGroup]="userForm">
+        <table cellspacing="0">
+          <tr>
+            <mat-form-field class="example-full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="name" />
+            </mat-form-field>
+          </tr>
+          <tr>
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+          </tr>
+          <tr></tr>
+          <tr>
+            <mat-form-field class="example-full-width">
+              <mat-label>Telefono</mat-label>
+              <span matPrefix>+57 &nbsp;</span>
+              <input
+                type="tel"
+                matInput
+                placeholder="555-555-1234"
+                formControlName="telephone"
+              />
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+          </tr>
+        </table>
+      </form></mat-card-content
+    >
+    <mat-card-actions align="end">
+      <button mat-raised-button>Editar<mat-icon>edit</mat-icon></button>
+
+      <button *ngIf="!isUserExists" (click)="onSubmit()" mat-raised-button>
+        Crear
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,6 +1,6 @@
 <div class="container">
-  <button mat-icon-button class="logout" (click)="logout()">
-    <mat-icon>logout</mat-icon>
+  <button *ngIf="isLogged" mat-icon-button class="logout" (click)="logout()">
+   Salir <mat-icon>logout</mat-icon>
   </button>
   <div class="content">
     <img src="../../../../assets/images/calendar.png" alt="calendar" />
@@ -9,12 +9,11 @@
     <h4>Ingrese en su cuenta de google para continuar</h4>
   </div>
   <div class="login" *ngIf="!isLogged">
-    <div *ngIf="!isLogged">
-      Ingresar
+    <div>
       <asl-google-signin-button
         type="standard"
         size="large"
-        text="signup_with"
+        text="signin_with"
       ></asl-google-signin-button>
     </div>
   </div>

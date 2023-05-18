@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .example-card {
+    width: 50%;
+    align-self: center;
+  }
+}

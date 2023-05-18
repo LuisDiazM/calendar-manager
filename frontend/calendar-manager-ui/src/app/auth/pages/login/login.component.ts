@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
   constructor(private userAuth: UserAuthService) {}
 
   ngOnInit(): void {
-    this.userAuth.getAuthenticatedUser();
+    this.userAuth.getAuthenticatedUser().subscribe()
     const token = sessionStorage.getItem(ACCESS_TOKEN);
     if (token !== null) {
       this.isLogged = true;

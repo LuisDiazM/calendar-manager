@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .form-registry-user {
+      width: 50%;
+      align-self: center;
+    }
+
+    .example-full-width{
+        width: 100%;
+    }
+  }

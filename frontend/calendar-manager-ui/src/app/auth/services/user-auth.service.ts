@@ -1,9 +1,8 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
-import { switchMap, tap } from 'rxjs';
-import { ACCESS_TOKEN } from 'src/app/shared/utilities/constants';
+import { Observable, tap } from 'rxjs';
+import { ACCESS_TOKEN, USER } from 'src/app/shared/utilities/constants';
 import { userManagerSubject } from 'src/app/shared/utilities/services/usermanager';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'any',
@@ -11,24 +10,21 @@ import { HttpClient } from '@angular/common/http';
 export class UserAuthService {
   user: SocialUser | undefined;
 
-  constructor(
-    private socialAuthService: SocialAuthService,
-  ) {}
+  constructor(private socialAuthService: SocialAuthService) {}
 
-  getAuthenticatedUser() {
-    this.socialAuthService.authState
-      .pipe(
-        tap((user) => (this.user = user)),
-        tap((user) => {
-          userManagerSubject.setUser(user);
-        }),
-        tap((user) => {
-          if (user) {
-            sessionStorage.setItem(ACCESS_TOKEN, user.idToken);
-          }
-        }),
-      )
-      .subscribe();
+  getAuthenticatedUser(): Observable<SocialUser> {
+    return this.socialAuthService.authState.pipe(
+      tap((user) => (this.user = user)),
+      tap((user) => {
+        userManagerSubject.setUser(user);
+      }),
+      tap((user) => {
+        if (user) {
+          sessionStorage.setItem(ACCESS_TOKEN, user.idToken);
+          sessionStorage.setItem(USER, JSON.stringify(user));
+        }
+      })
+    );
   }
 
   logout() {
@@ -38,5 +34,9 @@ export class UserAuthService {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  get userData() {
+    return this.user;
   }
 }

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './shared/pages/error/error.component';
 import {
-  googleAuthGuardActivate,
   googleAuthGuardMatch,
 } from './auth/guards/google-auth.guard';
 
@@ -15,14 +14,12 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
-    canActivate: [googleAuthGuardActivate],
     canMatch: [googleAuthGuardMatch],
   },
   {
     path: 'meetings',
     loadChildren: () =>
       import('./meetings/meetings.module').then((m) => m.MeetingsModule),
-    canActivate: [googleAuthGuardActivate],
     canMatch: [googleAuthGuardMatch],
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
