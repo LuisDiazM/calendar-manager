@@ -55,4 +55,14 @@ export class UserService {
       return of(false);
     }
   }
+
+  updateUser(user: UserCalendarManager) {
+    const token = this.accessToken;
+    if (token !== null) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.put(`${this.url}/api/v1/users`, user, { headers });
+    } else {
+      return of(false);
+    }
+  }
 }

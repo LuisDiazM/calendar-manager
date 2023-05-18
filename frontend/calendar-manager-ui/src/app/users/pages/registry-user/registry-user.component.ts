@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { UserCalendarManager } from '../../entities/user.model';
-import { tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { adapterUserBackend } from '../../adapters/user.adapter';
 
 @Component({
   selector: 'app-registry-user',
@@ -25,29 +25,42 @@ export class RegistryUserComponent implements OnInit {
     telephone: [''],
     id: [''],
   });
+
+  setForm(user: UserCalendarManager) {
+    this.userForm.setValue({
+      name: user.name,
+      email: user.email,
+      telephone: user.telephone,
+      id: user.id,
+    });
+  }
+
   ngOnInit(): void {
     const user = this.userService.getUserStored();
     if (user !== null) {
       this.userService.getUserFromBackend(user.id).subscribe((userData) => {
         if (userData !== null) {
           this.isUserExists = true;
+          this.setForm(userData);
         } else {
           this.isUserExists = false;
+          this.setForm(adapterUserBackend(user));
         }
       });
       this.userLogged = user;
-      this.userForm.setValue({
-        name: user.name,
-        email: user.email,
-        telephone: '',
-        id: user.id,
-      });
     }
   }
 
-  onSubmit() {
+  onSubmitCreated() {
     const userData = this.userForm.value as UserCalendarManager;
     this.userService.createUser(userData).subscribe(() => {
+      this.router.navigateByUrl('users');
+    });
+  }
+
+  onSubmitUpdated() {
+    const userData = this.userForm.value as UserCalendarManager;
+    this.userService.updateUser(userData).subscribe(() => {
       this.router.navigateByUrl('users');
     });
   }
