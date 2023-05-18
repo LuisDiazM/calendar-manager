@@ -59,7 +59,6 @@ func JwtGoogle() gin.HandlerFunc {
 			kid := token.Header["kid"].(string)
 			for _, key := range googleKey.Keys {
 				if key.Kid == kid {
-
 					return jwt.ParseRSAPublicKeyFromPEM([]byte(fmt.Sprintf("-----BEGIN CERTIFICATE-----\n%s\n-----END CERTIFICATE-----", key.N)))
 				}
 			}

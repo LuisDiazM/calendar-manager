@@ -9,3 +9,7 @@ type CreateUserRepository interface {
 type GetUserRepository interface {
 	GetUserById(id string) (*entities.Users, error)
 }
+
+type UpdateUserRepository interface {
+	UpdateUser(user entities.Users) error
+}

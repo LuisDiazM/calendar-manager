@@ -1,4 +1,4 @@
-package repositories
+package users
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/entities"

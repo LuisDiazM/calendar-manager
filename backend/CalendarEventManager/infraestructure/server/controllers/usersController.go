@@ -41,3 +41,19 @@ func GetUserById(usersUsecase *users.UsersUsecase) gin.HandlerFunc {
 		}
 	}
 }
+
+func UpdateUser(usersUsecase *users.UsersUsecase) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var user entities.Users
+		err := ctx.BindJSON(&user)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+		err = usersUsecase.UpdateUserUsecase.UpdateUser(user)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, err.Error())
+			return
+		}
+	}
+}

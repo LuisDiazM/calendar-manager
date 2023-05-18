@@ -9,4 +9,5 @@ import (
 func RegisterUsersRouter(group *gin.RouterGroup, app *app.Application) {
 	group.POST("/users", controllers.CreateUser(app.UsersUsecase))
 	group.GET("/user/:id", controllers.GetUserById(app.UsersUsecase))
+	group.PUT("/users", controllers.UpdateUser(app.UsersUsecase))
 }

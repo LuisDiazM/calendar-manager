@@ -11,7 +11,7 @@ import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/usecases/users/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/repositories"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/repositories/users"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 )
 
@@ -21,9 +21,10 @@ func CreateApp() *app.Application {
 	env := config.NewEnvironmentsSpecification()
 	engine := server.NewHTTPServer()
 	databaseGateway := database.NewDatabaseImp()
-	createUserRepository := repositories.NewUsersRepository(databaseGateway)
-	getUserRepository := repositories.NewUsersRepositoryReader(databaseGateway)
-	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository)
+	createUserRepository := users.NewUsersRepository(databaseGateway)
+	getUserRepository := users.NewUsersRepositoryReader(databaseGateway)
+	updateUserRepository := users.NewUsersRepositoryUpdate(databaseGateway)
+	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository, updateUserRepository)
 	application := app.NewApplication(env, engine, databaseGateway, usersUsecase)
 	return application
 }

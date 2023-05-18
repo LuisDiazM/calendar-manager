@@ -7,9 +7,14 @@ import (
 type UsersUsecase struct {
 	CreateUserUsecase *CreateUser
 	GetUsersUsecase   *GetUsersUsecase
+	UpdateUserUsecase *UpdateUser
 }
 
-func NewUsersUsecase(createUsersRepo repositories.CreateUserRepository, getUsersRepo repositories.GetUserRepository) *UsersUsecase {
-	return &UsersUsecase{CreateUserUsecase: NewCreateUser(createUsersRepo),
-		GetUsersUsecase: NewGetUsersUsecase(getUsersRepo)}
+func NewUsersUsecase(createUsersRepo repositories.CreateUserRepository,
+	getUsersRepo repositories.GetUserRepository,
+	updateUserRepo repositories.UpdateUserRepository) *UsersUsecase {
+	return &UsersUsecase{
+		CreateUserUsecase: NewCreateUser(createUsersRepo),
+		GetUsersUsecase:   NewGetUsersUsecase(getUsersRepo),
+		UpdateUserUsecase: NewUpdateUser(updateUserRepo)}
 }

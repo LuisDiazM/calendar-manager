@@ -16,6 +16,7 @@ func CreateApp() *app.Application {
 		UsersUsecasesProvider,
 		UsersRepositoryProvider,
 		UsersRepositoryReaderProvider,
+		UsersRepositoryUpdateProvider,
 	)
 	return new(app.Application)
 }
