@@ -34,7 +34,11 @@
       </form></mat-card-content
     >
     <mat-card-actions align="end">
-      <button mat-raised-button (click)="onSubmitUpdated()">
+      <button
+        mat-raised-button
+        *ngIf="isUserExists"
+        (click)="onSubmitUpdated()"
+      >
         Editar<mat-icon>edit</mat-icon>
       </button>
 
