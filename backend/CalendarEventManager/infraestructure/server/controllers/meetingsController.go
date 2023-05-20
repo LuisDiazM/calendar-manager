@@ -69,3 +69,15 @@ func ReadByIdMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFu
 		}
 	}
 }
+
+func FindMeetingsByUserController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		id := ctx.Param("id")
+		meetings, _ := usecases.ReadMeeting.FindMeetingsByUserId(id)
+		if len(*meetings) > 0 {
+			ctx.JSON(http.StatusOK, meetings)
+		} else {
+			ctx.JSON(http.StatusNoContent, nil)
+		}
+	}
+}

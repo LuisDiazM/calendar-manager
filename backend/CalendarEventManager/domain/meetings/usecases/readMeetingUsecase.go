@@ -18,3 +18,7 @@ func NewReadMeeting(readMeetingRepo repositories.ReadMeetingRepository) *ReadMee
 func (usecase *ReadMeeting) FindMeetingById(id string) (*entities.Meetings, error) {
 	return usecase.ReadMeetingRepo.ReadMeeting(id)
 }
+
+func (usecase *ReadMeeting) FindMeetingsByUserId(userId string) (*[]entities.Meetings, error) {
+	return usecase.ReadMeetingRepo.GetMeetingsByUser(userId)
+}

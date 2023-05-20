@@ -10,4 +10,5 @@ type WriteMeetingRepository interface {
 
 type ReadMeetingRepository interface {
 	ReadMeeting(id string) (*entities.Meetings, error)
+	GetMeetingsByUser(userId string) (*[]entities.Meetings, error)
 }

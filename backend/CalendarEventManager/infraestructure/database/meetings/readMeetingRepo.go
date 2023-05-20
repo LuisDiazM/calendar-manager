@@ -24,3 +24,12 @@ func (repo *ReadMeetingRepo) ReadMeeting(id string) (*entities.Meetings, error) 
 		return &meeting, nil
 	}
 }
+
+func (repo *ReadMeetingRepo) GetMeetingsByUser(userId string) (*[]entities.Meetings, error) {
+	var meetings []entities.Meetings
+	result := repo.database.DB().Where(&entities.Meetings{UserID: userId}).Find(&meetings)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &meetings, nil
+}
