@@ -25,7 +25,7 @@ func CreateMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc
 			ctx.JSON(http.StatusInternalServerError, nil)
 			return
 		}
-		ctx.JSON(http.StatusCreated, nil)
+		ctx.JSON(http.StatusCreated, meeting)
 	}
 }
 
@@ -75,7 +75,7 @@ func FindMeetingsByUserController(usecases *usecases.MeetingsUsecase) gin.Handle
 	return func(ctx *gin.Context) {
 		id := ctx.Param("id")
 		after := ctx.Query("after")
-		timestamp, err := time.Parse("2006-01-02T15:04:05.000-05:00", after)
+		timestamp, err := time.Parse("2006-01-02T15:04:05.000Z", after)
 		if err != nil {
 			ctx.JSON(http.StatusBadRequest, err)
 			return

@@ -1,0 +1,13 @@
+<button style="margin-left: 5%;" mat-raised-button color="accent">Crear Reunión</button>
+<div class="container">
+    <mat-spinner *ngIf="isLoaingMeetings"></mat-spinner>
+    <img
+      *ngIf="!isLoaingMeetings && (meetingsByUser.length <= 0 )"
+      style="width: 50%"
+      src="../../../../assets/images/no-data.jpg"
+    />
+    <div *ngFor="let meeting of meetingsByUser">
+      <app-basic-info-meeting [meeting]="meeting"></app-basic-info-meeting>
+    </div>
+
+</div>

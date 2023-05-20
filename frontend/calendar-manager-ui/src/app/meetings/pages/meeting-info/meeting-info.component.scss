@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .example-viewport {
+    height: 200px;
+  }
+
+  .example-item {
+    height: 50px;
+  }
+
+  .card-meeting-info{
+    width: 120%;
+  }
+
+  .meeting-schedule{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+  }
+}

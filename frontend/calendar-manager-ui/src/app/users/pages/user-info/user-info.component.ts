@@ -1,6 +1,5 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { USER } from 'src/app/shared/utilities/constants';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -9,6 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit {
+
   constructor(private userService: UserService) {}
   userLogged: SocialUser | undefined;
   ngOnInit(): void {

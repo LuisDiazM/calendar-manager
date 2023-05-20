@@ -1,0 +1,15 @@
+<div (click)="openMeeting()">
+  <mat-card class="meeting-card">
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title>{{ meeting.title | slice : 0 : 20 }}</mat-card-title>
+        <mat-card-subtitle>{{
+          meeting.meeting_date | date : "medium"
+        }}</mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+      {{ meeting.video_conference_link }}
+    </mat-card-content>
+  </mat-card>
+</div>

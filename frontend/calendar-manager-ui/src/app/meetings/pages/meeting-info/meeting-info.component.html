@@ -1,1 +1,57 @@
-<p>meeting-info works!</p>
+<div class="container">
+  <ng-template #noMeetingInfo>
+    <mat-spinner *ngIf="isLoaderMeeting"></mat-spinner>
+    <img style="width: 50%" src="../../../../assets/images/no-data.jpg" />
+  </ng-template>
+  <div *ngIf="meetingInfo && !isLoaderMeeting; else noMeetingInfo">
+    <mat-card class="card-meeting-info">
+      <mat-card-header>
+        <mat-card-title>{{ meetingInfo.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ meetingInfo.description }}</p>
+        <div class="meeting-schedule">
+          <button
+            mat-raised-button
+            color="primary"
+            matBadge=""
+            matBadgePosition="after"
+            matBadgeColor="accent"
+          >
+            {{ meetingInfo.meeting_date | date : "medium" }}
+          </button>
+          <a [href]="meetingInfo.video_conference_link" target="_blank">
+            {{ meetingInfo.video_conference_link }}</a
+          >
+        </div>
+        <p>
+          Duración: <b>{{ meetingInfo.event_duration }}</b> minutos
+        </p>
+        <div>
+          <h3><b>Invitados</b></h3>
+          <cdk-virtual-scroll-viewport
+            appendOnly
+            itemSize="10"
+            class="example-viewport"
+          >
+            <div
+              *cdkVirtualFor="let item of meetingInfo.invited_guest"
+              class="example-item"
+            >
+              {{ item }}
+            </div>
+          </cdk-virtual-scroll-viewport>
+        </div>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Editar</button>
+        <button mat-raised-button color="warn" (click)="openDialog('0ms', '0ms')">Eliminar</button>
+
+      </mat-card-actions>
+      <mat-card-footer>
+        <mat-progress-bar mode="determinate"></mat-progress-bar>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
