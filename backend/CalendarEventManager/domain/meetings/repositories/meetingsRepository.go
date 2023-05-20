@@ -1,6 +1,10 @@
 package respositories
 
-import "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
+import (
+	"time"
+
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
+)
 
 type WriteMeetingRepository interface {
 	CreateMeeting(meeting entities.Meetings) error
@@ -10,5 +14,5 @@ type WriteMeetingRepository interface {
 
 type ReadMeetingRepository interface {
 	ReadMeeting(id string) (*entities.Meetings, error)
-	GetMeetingsByUser(userId string) (*[]entities.Meetings, error)
+	GetMeetingsByUser(userId string, timestamp time.Time) (*[]entities.Meetings, error)
 }

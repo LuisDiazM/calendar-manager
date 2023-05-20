@@ -1,6 +1,8 @@
 package meetings
 
 import (
+	"time"
+
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
 	respositories "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/repositories"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
@@ -25,9 +27,9 @@ func (repo *ReadMeetingRepo) ReadMeeting(id string) (*entities.Meetings, error) 
 	}
 }
 
-func (repo *ReadMeetingRepo) GetMeetingsByUser(userId string) (*[]entities.Meetings, error) {
+func (repo *ReadMeetingRepo) GetMeetingsByUser(userId string, timestamp time.Time) (*[]entities.Meetings, error) {
 	var meetings []entities.Meetings
-	result := repo.database.DB().Where(&entities.Meetings{UserID: userId}).Find(&meetings)
+	result := repo.database.DB().Where("user_id = ? AND meeting_date >= ?", userId, timestamp).Find(&meetings)
 	if result.Error != nil {
 		return nil, result.Error
 	}

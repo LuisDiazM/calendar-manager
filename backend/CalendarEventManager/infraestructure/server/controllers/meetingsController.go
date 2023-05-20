@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
@@ -73,7 +74,13 @@ func ReadByIdMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFu
 func FindMeetingsByUserController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id := ctx.Param("id")
-		meetings, _ := usecases.ReadMeeting.FindMeetingsByUserId(id)
+		after := ctx.Query("after")
+		timestamp, err := time.Parse("2006-01-02T15:04:05.000-05:00", after)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, err)
+			return
+		}
+		meetings, _ := usecases.ReadMeeting.FindMeetingsByUserId(id, timestamp)
 		if len(*meetings) > 0 {
 			ctx.JSON(http.StatusOK, meetings)
 		} else {

@@ -1,6 +1,8 @@
 package usecases
 
 import (
+	"time"
+
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
 	repositories "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/repositories"
 )
@@ -19,6 +21,6 @@ func (usecase *ReadMeeting) FindMeetingById(id string) (*entities.Meetings, erro
 	return usecase.ReadMeetingRepo.ReadMeeting(id)
 }
 
-func (usecase *ReadMeeting) FindMeetingsByUserId(userId string) (*[]entities.Meetings, error) {
-	return usecase.ReadMeetingRepo.GetMeetingsByUser(userId)
+func (usecase *ReadMeeting) FindMeetingsByUserId(userId string, timestamp time.Time) (*[]entities.Meetings, error) {
+	return usecase.ReadMeetingRepo.GetMeetingsByUser(userId, timestamp)
 }
