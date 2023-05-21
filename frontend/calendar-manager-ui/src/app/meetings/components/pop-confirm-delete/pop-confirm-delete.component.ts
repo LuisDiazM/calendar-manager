@@ -20,7 +20,8 @@ export class PopConfirmDeleteComponent {
   ) {}
 
   deleteMeeting() {
-    this.meetingService.deleteMeetingById(this.data.id).subscribe();
-    this.route.navigate(["/meetings"])
+    this.meetingService.deleteMeetingById(this.data.id).subscribe(() => {
+      this.route.navigate(['/meetings']);
+    });
   }
 }

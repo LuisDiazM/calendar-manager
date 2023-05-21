@@ -1,17 +1,6 @@
 import { MeetingForm } from '../components/meeting-form/meeting-form.component';
 import { MeetingModel } from '../entities/meeting.model';
 
-// const transformDateTimePicker = (hour: string, date: Date): Date => {
-//   const hoursSplitted = hour.split(/:/);
-//   const minutesSplitted = hoursSplitted[1].split(/\s/);
-//   const hours = hoursSplitted[0];
-//   const minutes = minutesSplitted[0];
-//   const copyDate = { ...date };
-//   copyDate.setHours(parseInt(hours));
-//   copyDate.setMinutes(parseInt(minutes));
-//   return copyDate;
-// };
-
 const transform12hTo24 = (hour: number, abbreviation: string): number => {
   if (hour === 12 && abbreviation === 'AM') {
     return 0;
