@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MeetingService } from '../../services/meeting.service';
 import { Router } from '@angular/router';
+
 export interface DialogData {
   id: string;
 }

@@ -1,5 +1,5 @@
 export interface MeetingModel {
-  id: string;
+  id?: string;
   invited_guest: string[];
   meeting_date: Date;
   title: string;

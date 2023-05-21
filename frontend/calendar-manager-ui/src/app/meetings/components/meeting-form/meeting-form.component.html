@@ -1,0 +1,87 @@
+<div class="container">
+  <form [formGroup]="meetingForm" (ngSubmit)="onSave()">
+    <table>
+      <tr>
+        <mat-form-field class="full-width-input">
+          <mat-label>Título de la reunión</mat-label>
+          <input
+            matInput
+            placeholder="Revisión de funcionalidades"
+            value=""
+            formControlName="title"
+          />
+        </mat-form-field>
+      </tr>
+      <tr>
+        <mat-form-field class="full-width-input">
+          <mat-label>Objetivo de la reunión</mat-label>
+          <textarea
+            matInput
+            placeholder="Se analizará el roadmap de la aplicación"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </tr>
+    </table>
+
+    <div class="datetime-input">
+      <mat-form-field class="full-width-input">
+        <mat-label>Seleccione la fecha de reunión</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="meeting_date"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="full-width-input">
+        <mat-label>Hora de la reunión</mat-label>
+        <input
+          matInput
+          name="selected_time_B"
+          [ngxMatTimepicker]="pickerB"
+          readonly
+          formControlName="meeting_hour"
+        />
+        <mat-icon matSuffix (click)="pickerB.open()"> watch_later </mat-icon>
+      </mat-form-field>
+      <ngx-mat-timepicker color="accent" #pickerB></ngx-mat-timepicker>
+      <mat-form-field>
+        <mat-label>Duración (minutos)</mat-label>
+        <input
+          formControlName="event_duration"
+          matInput
+          type="number"
+          value="15"
+        />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-chip-list">
+      <mat-label>Correo de los invitados</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter fruits">
+        <mat-chip-row *ngFor="let fruit of Inviteds"
+                      (removed)="remove(fruit)"
+                      [editable]="true"
+                      (edited)="edit(fruit, $event)"
+                      [aria-description]="'press enter to edit ' + fruit.email">
+          {{fruit.email}}
+          <button matChipRemove [attr.aria-label]="'remove ' + fruit.email">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="correo"
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)"/>
+      </mat-chip-grid>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" type="submit" >Confirmar</button>
+  </form>
+</div>

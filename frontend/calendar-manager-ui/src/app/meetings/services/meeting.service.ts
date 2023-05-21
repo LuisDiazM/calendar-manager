@@ -5,6 +5,7 @@ import { environments } from 'src/app/environments/environment';
 import { ACCESS_TOKEN, USER } from 'src/app/shared/utilities/constants';
 import { MeetingModel } from '../entities/meeting.model';
 import { Observable, of, switchMap } from 'rxjs';
+import { EMPTY_MEETING } from '../utilities/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -68,5 +69,23 @@ export class MeetingService {
     } else {
       return of([]);
     }
+  }
+
+  createMeeting(meeting: MeetingModel) {
+    const token = this.accessToken;
+    if (token !== null) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.post<MeetingModel>(`${this.url}/api/v1/meetings`, meeting, { headers });
+    }
+    return of(EMPTY_MEETING);
+  }
+
+  editMeeting(meeting: MeetingModel) {
+    const token = this.accessToken;
+    if (token !== null) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.put<MeetingModel>(`${this.url}/api/v1/meeting/${meeting.id}`, meeting, { headers });
+    }
+    return of(EMPTY_MEETING);
   }
 }

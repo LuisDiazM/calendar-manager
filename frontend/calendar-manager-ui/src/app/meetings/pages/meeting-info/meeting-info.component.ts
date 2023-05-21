@@ -10,6 +10,7 @@ import { MeetingModel } from '../../entities/meeting.model';
 import { Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PopConfirmDeleteComponent } from '../../components/pop-confirm-delete/pop-confirm-delete.component';
+import { EditMeetingDialogComponent } from '../../components/edit-meeting-dialog/edit-meeting-dialog.component';
 
 @Component({
   selector: 'app-meeting-info',
@@ -50,6 +51,7 @@ export class MeetingInfoComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroySubject.unsubscribe();
   }
+
   openDialog(
     enterAnimationDuration: string,
     exitAnimationDuration: string
@@ -61,6 +63,21 @@ export class MeetingInfoComponent implements OnInit, OnDestroy {
       data: {
         id: this.meetingInfo?.id,
       },
+    });
+  }
+
+  openDialogEditMeeting(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string
+  ): void {
+    this.dialog.open(EditMeetingDialogComponent, {
+      width: '60%',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data: {
+        ...this.meetingInfo,
+      },
+      closeOnNavigation: true,
     });
   }
 }

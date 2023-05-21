@@ -45,9 +45,16 @@
         <mat-divider></mat-divider>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>Editar</button>
-        <button mat-raised-button color="warn" (click)="openDialog('0ms', '0ms')">Eliminar</button>
-
+        <button mat-button (click)="openDialogEditMeeting('0ms', '0ms')">
+          Editar
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="openDialog('0ms', '0ms')"
+        >
+          Eliminar
+        </button>
       </mat-card-actions>
       <mat-card-footer>
         <mat-progress-bar mode="determinate"></mat-progress-bar>
