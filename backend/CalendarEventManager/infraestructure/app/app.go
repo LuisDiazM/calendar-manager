@@ -11,6 +11,7 @@ import (
 	meetings "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 	"github.com/gin-gonic/gin"
@@ -24,6 +25,7 @@ type Application struct {
 	UsersUsecase    *users.UsersUsecase
 	MeetingsUsecase *meetings.MeetingsUsecase
 	BrokerProducer  *messaging.RabbitProducer
+	ZoomAPI         *zoom.ZoomAPI
 }
 
 func NewApplication(configVars *config.Env,
@@ -31,7 +33,8 @@ func NewApplication(configVars *config.Env,
 	database database.DatabaseGateway,
 	usersUsecase *users.UsersUsecase,
 	meetingUsecase *meetings.MeetingsUsecase,
-	brokerProducer *messaging.RabbitProducer) *Application {
+	brokerProducer *messaging.RabbitProducer,
+	zoomApi *zoom.ZoomAPI) *Application {
 	return &Application{
 		Env:             configVars,
 		WebServer:       webServer,
@@ -39,6 +42,7 @@ func NewApplication(configVars *config.Env,
 		UsersUsecase:    usersUsecase,
 		MeetingsUsecase: meetingUsecase,
 		BrokerProducer:  brokerProducer,
+		ZoomAPI:         zoomApi,
 	}
 }
 

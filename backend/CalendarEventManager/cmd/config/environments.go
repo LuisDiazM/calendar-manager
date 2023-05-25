@@ -18,6 +18,10 @@ type Env struct {
 	RABBITMQ_DEFAULT_VHOST string `mapstructure:"RABBITMQ_DEFAULT_VHOST"`
 	RABBITMQ_HOST          string `mapstructure:"RABBITMQ_HOST"`
 	APP_NAME_NOTIFICATIONS string `mapstructure:"APP_NAME_NOTIFICATIONS"`
+	ZOOM_CLIENT_ID         string `mapstructure:"ZOOM_CLIENT_ID"`
+	ZOOM_CLIENT_SECRET     string `mapstructure:"ZOOM_CLIENT_SECRET"`
+	ZOOM_URL               string `mapstructure:"ZOOM_URL"`
+	ZOOM_ACCOUNT_ID        string `mapstructure:"ZOOM_ACCOUNT_ID"`
 }
 
 func NewEnvironmentsSpecification() *Env {
