@@ -9,7 +9,7 @@
       </mat-card-title-group>
     </mat-card-header>
     <mat-card-content>
-      {{ meeting.video_conference_link }}
+     <a [href]="meeting.video_conference_link" target="_blank"> {{ meeting.video_conference_link }} </a>
     </mat-card-content>
   </mat-card>
 </div>

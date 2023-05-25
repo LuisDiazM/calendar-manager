@@ -18,7 +18,7 @@ import {
 import { MeetingService } from '../../services/meeting.service';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
-import { timer } from 'rxjs';
+import { delay, tap, timer } from 'rxjs';
 
 export interface Invited {
   email: string;
@@ -50,8 +50,7 @@ export class MeetingFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private meetingService: MeetingService,
-    private route: Router,
-     
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -123,13 +122,22 @@ export class MeetingFormComponent implements OnInit {
       ...this.meetingForm.value,
       invited_guest: [...this.Inviteds.map((invited) => invited.email)],
       user_id: this.user?.id,
-      id: this.meeting.id
+      id: this.meeting.id,
     };
     const converter = meetingCreateFormToBackend(meetingValues);
-    this.newMeetingEvent.emit(converter);
-    this.isCloseForm.emit(true);
-    timer(600).subscribe(() => {
-      this.route.navigate(['meetings']);
-    });
+    timer(100)
+      .pipe(
+        tap(() => {
+          this.newMeetingEvent.emit(converter);
+        }),
+        delay(2000),
+        tap(() => {
+          this.isCloseForm.emit(true);
+        }),
+        tap(() => {
+          this.route.navigate(['meetings']);
+        })
+      )
+      .subscribe();
   }
 }
