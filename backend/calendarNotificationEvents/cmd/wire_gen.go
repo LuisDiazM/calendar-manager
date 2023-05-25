@@ -8,7 +8,10 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/cmd/config"
+	meetings2 "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/app"
+	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database"
+	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/messaging"
 )
 
@@ -17,6 +20,9 @@ import (
 func CreateApp() *app.Application {
 	env := config.NewEnvironmentsSpecification()
 	rabbitMQConsumer := messaging.NewRabbitMQConsumer(env)
-	application := app.NewApplication(env, rabbitMQConsumer)
+	databaseImp := database.NewDatabaseImplementation(env)
+	meetingsWriteRepository := meetings.NewMeetingWriteRepository(databaseImp)
+	meetingsUsecase := meetings2.NewMeetingsUsecase(meetingsWriteRepository)
+	application := app.NewApplication(env, rabbitMQConsumer, databaseImp, meetingsUsecase)
 	return application
 }

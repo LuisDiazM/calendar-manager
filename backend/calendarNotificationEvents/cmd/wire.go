@@ -11,6 +11,10 @@ import (
 func CreateApp() *app.Application {
 	wire.Build(AppProvider,
 		EnvironmentVariablesProvider,
-		MessagingRabbitProvider)
+		MessagingRabbitProvider,
+		DatabaseProvider,
+		MeetingsUsecaseProvider,
+		MeetingWriteRepositoryProvider,
+	)
 	return new(app.Application)
 }

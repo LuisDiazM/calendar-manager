@@ -2,10 +2,21 @@ package app
 
 import (
 	"context"
-	"fmt"
+	"encoding/json"
+
+	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings/entities"
 )
 
 func (app *Application) CreateMeetingHandler(ctx context.Context, request map[string]interface{}) error {
-	fmt.Println(request)
-	return nil
+	var structRequest entities.Meetings
+	data, err := json.Marshal(request)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal(data, &structRequest)
+	if err != nil {
+		return err
+	}
+	err = app.MeetingUsecase.CreateNotifications(structRequest, ctx)
+	return err
 }

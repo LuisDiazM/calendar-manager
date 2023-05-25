@@ -12,6 +12,8 @@ type Env struct {
 	RABBITMQ_DEFAULT_VHOST string `mapstructure:"RABBITMQ_DEFAULT_VHOST"`
 	RABBITMQ_HOST          string `mapstructure:"RABBITMQ_HOST"`
 	APP_NAME               string `mapstructure:"APP_NAME"`
+	MONGO_HOST             string `mapstructure:"MONGO_HOST"`
+	MONGO_POOL_SIZE        uint64 `mapstructure:"MONGO_POOL_SIZE"`
 }
 
 func NewEnvironmentsSpecification() *Env {
