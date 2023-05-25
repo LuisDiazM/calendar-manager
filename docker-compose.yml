@@ -26,3 +26,12 @@ services:
       RABBITMQ_DEFAULT_VHOST: dev
     ports:
       - 5672:5672
+  
+  nosqlmongo:
+    image: mongo:5.0
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: fhasgkr867fa654
+    ports:
+      - 27017:27017
