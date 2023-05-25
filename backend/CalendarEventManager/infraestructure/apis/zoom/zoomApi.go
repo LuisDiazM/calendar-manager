@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom/models"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
 )
 
 type ZoomAPI struct {
@@ -26,7 +26,7 @@ func NewZoomApi(envs *config.Env) *ZoomAPI {
 		AccountId:    envs.ZOOM_ACCOUNT_ID}
 }
 
-func (api *ZoomAPI) GenerateAccessToken() *models.AccessTokenResponse {
+func (api *ZoomAPI) GenerateAccessToken() *entities.AccessTokenResponse {
 	url := fmt.Sprintf(`%s/oauth/token`, api.Url)
 	method := "POST"
 	credentialsBasic := fmt.Sprintf(`%s:%s`, api.ClientId, api.ClientSecret)
@@ -53,7 +53,7 @@ func (api *ZoomAPI) GenerateAccessToken() *models.AccessTokenResponse {
 		fmt.Println(err)
 		return nil
 	}
-	var accessToken models.AccessTokenResponse
+	var accessToken entities.AccessTokenResponse
 	err = json.Unmarshal(body, &accessToken)
 	if err != nil {
 		fmt.Println(err)
@@ -62,7 +62,7 @@ func (api *ZoomAPI) GenerateAccessToken() *models.AccessTokenResponse {
 	return &accessToken
 }
 
-func (api *ZoomAPI) CreateZoomMeeting(token string, userId string, meeting models.MeetingResponse) *models.MeetingResponse {
+func (api *ZoomAPI) CreateZoomMeeting(token string, userId string, meeting entities.MeetingResponse) *entities.MeetingResponse {
 
 	url := fmt.Sprintf(`%s/v2/users/%s/meetings`, api.Url, userId)
 	method := "POST"
@@ -94,7 +94,7 @@ func (api *ZoomAPI) CreateZoomMeeting(token string, userId string, meeting model
 		fmt.Println(err)
 		return nil
 	}
-	var meetingResponse models.MeetingResponse
+	var meetingResponse entities.MeetingResponse
 	err = json.Unmarshal(body, &meetingResponse)
 	if err != nil {
 		fmt.Println(err)

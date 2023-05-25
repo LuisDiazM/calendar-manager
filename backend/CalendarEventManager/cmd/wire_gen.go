@@ -11,6 +11,7 @@ import (
 	usecases2 "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom"
+	meetings2 "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
@@ -31,9 +32,10 @@ func CreateApp() *app.Application {
 	usersUsecase := usecases.NewUsersUsecase(createUserRepository, getUserRepository, updateUserRepository)
 	writeMeetingRepository := meetings.NewWriteMeetingRepository(databaseGateway)
 	readMeetingRepository := meetings.NewReadMeetingRepo(databaseGateway)
-	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository, readMeetingRepository)
-	rabbitProducer := messaging.NewProducer(env)
 	zoomAPI := zoom.NewZoomApi(env)
+	zoomApiRepository := meetings2.NewZoomApiRepository(zoomAPI)
+	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository, readMeetingRepository, zoomApiRepository)
+	rabbitProducer := messaging.NewProducer(env)
 	application := app.NewApplication(env, engine, databaseGateway, usersUsecase, meetingsUsecase, rabbitProducer, zoomAPI)
 	return application
 }

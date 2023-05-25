@@ -24,6 +24,7 @@ func CreateApp() *app.Application {
 		UsersRepositoryUpdateProvider,
 		MeetingRepositoryCreateProvider,
 		MeetRepositoryReadProvider,
+		ZoomMeetingRepositoryProvider,
 	)
 	return new(app.Application)
 }

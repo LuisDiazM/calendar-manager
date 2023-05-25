@@ -16,3 +16,8 @@ type ReadMeetingRepository interface {
 	ReadMeeting(id string) (*entities.Meetings, error)
 	GetMeetingsByUser(userId string, timestamp time.Time) (*[]entities.Meetings, error)
 }
+
+type ZoomApiRepository interface {
+	GenerateAccessToken() *entities.AccessTokenResponse
+	CreateZoomMeeting(token string, userId string, meeting entities.MeetingResponse) *entities.MeetingResponse
+}

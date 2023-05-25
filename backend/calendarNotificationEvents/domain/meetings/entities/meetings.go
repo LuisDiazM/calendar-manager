@@ -11,4 +11,5 @@ type Meetings struct {
 	EventDuration       int8      `json:"event_duration,omitempty" bson:"eventDuration"`
 	VideoConferenceLink string    `json:"video_conference_link,omitempty" bson:"videoConferenceLink"`
 	UserID              string    `json:"user_id" bson:"userId"`
+	ZoomMeetingId       int64     `json:"zoom_meeting_id,omitempty" bson:"zoomMeetingId"`
 }

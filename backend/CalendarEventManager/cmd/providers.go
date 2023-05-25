@@ -6,10 +6,12 @@ import (
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom"
+	zoomRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	meetingsRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
 	usersRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
+
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
@@ -34,3 +36,4 @@ var UsersRepositoryReaderProvider = wire.NewSet(usersRepo.NewUsersRepositoryRead
 var UsersRepositoryUpdateProvider = wire.NewSet(usersRepo.NewUsersRepositoryUpdate)
 var MeetingRepositoryCreateProvider = wire.NewSet(meetingsRepo.NewWriteMeetingRepository)
 var MeetRepositoryReadProvider = wire.NewSet(meetingsRepo.NewReadMeetingRepo)
+var ZoomMeetingRepositoryProvider = wire.NewSet(zoomRepo.NewZoomApiRepository)

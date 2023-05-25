@@ -1,4 +1,4 @@
-package models
+package entities
 
 type MeetingResponse struct {
 	UUID              string   `json:"uuid,omitempty"`
@@ -65,4 +65,11 @@ type Settings struct {
 
 type ApprovedOrDeniedCountriesOrRegions struct {
 	Enable bool `json:"enable,omitempty"`
+}
+
+type AccessTokenResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType   string `json:"token_type"`
+	ExpiresIn   int64  `json:"expires_in"`
+	Scope       string `json:"scope"`
 }
