@@ -9,15 +9,18 @@ import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	meetingsRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
 	usersRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 	"github.com/google/wire"
 )
 
+// infraestructure
 var EnvironmentVariablesProvider = wire.NewSet(config.NewEnvironmentsSpecification)
 var HTTPServerProvider = wire.NewSet(server.NewHTTPServer)
 var DatabaseProvider = wire.NewSet(database.NewDatabaseImp)
 var AppProvider = wire.NewSet(app.NewApplication)
+var BrokerProvider = wire.NewSet(messaging.NewProducer)
 
 // usecases
 var UsersUsecasesProvider = wire.NewSet(users.NewUsersUsecase)

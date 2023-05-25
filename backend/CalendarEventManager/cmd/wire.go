@@ -13,6 +13,7 @@ func CreateApp() *app.Application {
 		EnvironmentVariablesProvider,
 		HTTPServerProvider,
 		DatabaseProvider,
+		BrokerProvider,
 
 		UsersUsecasesProvider,
 		MeetingUsecaseProvider,

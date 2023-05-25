@@ -7,12 +7,17 @@ import (
 )
 
 type Env struct {
-	SERVER_PORT       int    `mapstructure:"SERVER_PORT"`
-	POSTGRES_PASSWORD string `mapstructure:"POSTGRES_PASSWORD"`
-	POSTGRES_USER     string `mapstructure:"POSTGRES_USER"`
-	POSTGRES_DB       string `mapstructure:"POSTGRES_DB"`
-	POSTGRES_PORT     string `mapstructure:"POSTGRES_PORT"`
-	POSTGRES_HOST     string `mapstructure:"POSTGRES_HOST"`
+	SERVER_PORT            int    `mapstructure:"SERVER_PORT"`
+	POSTGRES_PASSWORD      string `mapstructure:"POSTGRES_PASSWORD"`
+	POSTGRES_USER          string `mapstructure:"POSTGRES_USER"`
+	POSTGRES_DB            string `mapstructure:"POSTGRES_DB"`
+	POSTGRES_PORT          string `mapstructure:"POSTGRES_PORT"`
+	POSTGRES_HOST          string `mapstructure:"POSTGRES_HOST"`
+	RABBITMQ_DEFAULT_USER  string `mapstructure:"RABBITMQ_DEFAULT_USER"`
+	RABBITMQ_DEFAULT_PASS  string `mapstructure:"RABBITMQ_DEFAULT_PASS"`
+	RABBITMQ_DEFAULT_VHOST string `mapstructure:"RABBITMQ_DEFAULT_VHOST"`
+	RABBITMQ_HOST          string `mapstructure:"RABBITMQ_HOST"`
+	APP_NAME_NOTIFICATIONS string `mapstructure:"APP_NAME_NOTIFICATIONS"`
 }
 
 func NewEnvironmentsSpecification() *Env {

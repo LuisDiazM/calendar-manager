@@ -12,6 +12,7 @@ import (
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/sync/errgroup"
 )
@@ -22,19 +23,22 @@ type Application struct {
 	Database        database.DatabaseGateway
 	UsersUsecase    *users.UsersUsecase
 	MeetingsUsecase *meetings.MeetingsUsecase
+	BrokerProducer  *messaging.RabbitProducer
 }
 
 func NewApplication(configVars *config.Env,
 	webServer *gin.Engine,
 	database database.DatabaseGateway,
 	usersUsecase *users.UsersUsecase,
-	meetingUsecase *meetings.MeetingsUsecase) *Application {
+	meetingUsecase *meetings.MeetingsUsecase,
+	brokerProducer *messaging.RabbitProducer) *Application {
 	return &Application{
 		Env:             configVars,
 		WebServer:       webServer,
 		Database:        database,
 		UsersUsecase:    usersUsecase,
 		MeetingsUsecase: meetingUsecase,
+		BrokerProducer:  brokerProducer,
 	}
 }
 

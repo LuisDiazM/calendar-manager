@@ -14,6 +14,7 @@ import (
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/users"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/server"
 )
 
@@ -30,6 +31,7 @@ func CreateApp() *app.Application {
 	writeMeetingRepository := meetings.NewWriteMeetingRepository(databaseGateway)
 	readMeetingRepository := meetings.NewReadMeetingRepo(databaseGateway)
 	meetingsUsecase := usecases2.NewMeetingUsecases(writeMeetingRepository, readMeetingRepository)
-	application := app.NewApplication(env, engine, databaseGateway, usersUsecase, meetingsUsecase)
+	rabbitProducer := messaging.NewProducer(env)
+	application := app.NewApplication(env, engine, databaseGateway, usersUsecase, meetingsUsecase, rabbitProducer)
 	return application
 }

@@ -1,16 +1,19 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
+	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
 
-func CreateMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc {
+func CreateMeetingController(app *app.Application) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var meeting entities.Meetings
 		err := ctx.BindJSON(&meeting)
@@ -20,11 +23,18 @@ func CreateMeetingController(usecases *usecases.MeetingsUsecase) gin.HandlerFunc
 		}
 		id := uuid.New()
 		meeting.ID = id.String()
-		err = usecases.CreateMeeting.CreateMeeting(meeting)
+		err = app.MeetingsUsecase.CreateMeeting.CreateMeeting(meeting)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, nil)
 			return
 		}
+		//esto lo hará un caso de uso
+		var event messaging.Event = messaging.Event{Name: "registryMeeting", EventId: uuid.NewString(), Data: meeting}
+		err = app.BrokerProducer.PublishEvent(event, ctx.Request.Context())
+		if err != nil {
+			log.Println(err)
+		}
+		////
 		ctx.JSON(http.StatusCreated, meeting)
 	}
 }

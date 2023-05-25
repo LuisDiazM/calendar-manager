@@ -7,7 +7,7 @@ import (
 )
 
 func RegisterMeetingsRouter(group *gin.RouterGroup, app *app.Application) {
-	group.POST("/meetings", controllers.CreateMeetingController(app.MeetingsUsecase))
+	group.POST("/meetings", controllers.CreateMeetingController(app))
 	group.PUT("/meeting/:id", controllers.UpdateMeetingController(app.MeetingsUsecase))
 	group.DELETE("/meeting/:id", controllers.DeleteMeetingController(app.MeetingsUsecase))
 	group.GET("/meeting/:id", controllers.ReadByIdMeetingController(app.MeetingsUsecase))
