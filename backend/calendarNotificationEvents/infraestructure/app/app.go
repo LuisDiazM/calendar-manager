@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/cmd/config"
-	meetingsUsecase "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings"
+	meetingsUsecase "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/messaging"
 )

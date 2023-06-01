@@ -8,7 +8,7 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/cmd/config"
-	meetings2 "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings"
+	meetings2 "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database/meetings"

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/cmd/config"
-	meetingUsecase "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings"
+	meetingUsecase "github.com/LuisDiazM/calendar-manager/calendar-notification-events/domain/meetings/usecases"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database"
 	meetingsRepo "github.com/LuisDiazM/calendar-manager/calendar-notification-events/infraestructure/database/meetings"

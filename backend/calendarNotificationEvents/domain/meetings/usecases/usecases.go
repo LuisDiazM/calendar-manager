@@ -1,4 +1,4 @@
-package meetings
+package usecases
 
 import (
 	"context"
