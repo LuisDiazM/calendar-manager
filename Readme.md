@@ -73,12 +73,14 @@ El proyecto de angular donde un servidor nginx se encarga de servir la aplicaci�
 * Bases de datos:
 
   * MongoDB (NoSQL)
-Mongo-Express (Gestor de base de datos para Mongo) → http://localhost:8081 
+
+  Mongo-Express (Gestor de base de datos para Mongo) → http://localhost:8081 
 
         user: luismigueldiazmorales
         password: fjalkshfklahs
 
   * Postgresql (SQL)
+
 PgAdmin (Gestor de base de datos para postgres) http://localhost:8083
 
 	    user: luismigueldiazmorales@gmail.com
@@ -111,5 +113,15 @@ Tener Docker y Docker compose instalado
 1. ``git clone https://github.com/LuisDiazM/calendar-manager.git``
 2. ``cd calendar-manager``
 3. ``docker-compose up --build -d``
+
+
+*Nota*
+
+El paso 3. sólo se ejecuta la primera vez para crear los contenedores, una vez estén creados la proxima vez para levantar los contenedores se usa 
+``docker-compose up -d``
+
+Como buena prácitca al final de usar el proyecto ``docker-compose down`` para remover estos contenedores, ya que en windows si no se remueven al iniciar la máquina se empiezan a ejecutar de nuevo consumiendo recursos innecesarios.
+
+Algunas versiones de docker compose se usa sin el guion ``docker compose up -d``
 
 Completados los pasos se debe esperar hasta que todos los contenedores estén arriba y se puede acceder a la aplicación http://localhost:4200 
