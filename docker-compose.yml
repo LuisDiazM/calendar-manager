@@ -83,7 +83,7 @@ services:
       - rabbitmq
 
   calendar_event_manager:
-    build: backend/calendarEventManager/.
+    build: backend/CalendarEventManager/.
     image: calendar-event-manager:v1
     mem_limit: 512m
     cpus: 0.5
