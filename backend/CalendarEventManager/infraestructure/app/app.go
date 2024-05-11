@@ -32,7 +32,8 @@ func NewApplication(configVars *config.Env,
 	database database.DatabaseGateway,
 	usersUsecase *users.UsersUsecase,
 	meetingUsecase *meetings.MeetingsUsecase,
-	brokerProducer *messaging.RabbitProducer) *Application {
+	brokerProducer *messaging.RabbitProducer,
+) *Application {
 	return &Application{
 		Env:             configVars,
 		WebServer:       webServer,

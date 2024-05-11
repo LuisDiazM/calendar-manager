@@ -3,6 +3,20 @@ version: '3.1'
 
 services:
 
+  prometheus:
+      image: prom/prometheus
+      container_name: prometheus
+      command:
+        - '--config.file=/etc/prometheus/prometheus.yml'
+      ports:
+        - 9090:9090
+      restart: unless-stopped
+      volumes:
+        - ./infraestructure/prometheus:/etc/prometheus
+        - prom_data:/prometheus
+      network_mode: "host"  
+
+
   dbpostgres:
     image: postgres
     restart: always
@@ -45,26 +59,5 @@ services:
       - ./volumes/mongodb:/data/db
     network_mode: "host"  
   
-
-  # calendar_notifications:
-  #   build: backend/calendarNotificationEvents/.
-  #   image: calendar-notification-events:v1
-  #   restart: always
-  #   mem_limit: 512m
-  #   cpus: 0.5
-  #   depends_on: 
-  #     - nosqlmongo
-  #     - rabbitmq
-
-  # calendar_event_manager:
-  #   build: backend/CalendarEventManager/.
-  #   image: calendar-event-manager:v1
-  #   mem_limit: 512m
-  #   cpus: 0.5
-  #   restart: always
-  #   ports:
-  #     - 9090:9090
-  #   depends_on: 
-  #     - dbpostgres
-  #     - rabbitmq
-
+volumes:
+  prom_data:
