@@ -37,6 +37,7 @@ func NewProducer(envs *config.Env) *RabbitProducer {
 		log.Println(err)
 	}
 	producerId := fmt.Sprintf(`%s-%s`, envs.APP_NAME_NOTIFICATIONS, uuid.New().String())
+	log.Println("rabbit ready")
 	return &RabbitProducer{envs: envs, conn: conn, lock: &sync.Mutex{}, id: producerId, ch: channel}
 }
 

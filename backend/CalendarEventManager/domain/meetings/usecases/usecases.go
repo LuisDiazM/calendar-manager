@@ -10,8 +10,7 @@ type MeetingsUsecase struct {
 }
 
 func NewMeetingUsecases(createRepo respositories.WriteMeetingRepository,
-	readMeetingRepo respositories.ReadMeetingRepository,
-	createMeetingZoomRepo respositories.ZoomApiRepository) *MeetingsUsecase {
-	return &MeetingsUsecase{CreateMeeting: NewCreateMeeting(createRepo, createMeetingZoomRepo),
+	readMeetingRepo respositories.ReadMeetingRepository) *MeetingsUsecase {
+	return &MeetingsUsecase{CreateMeeting: NewCreateMeeting(createRepo),
 		ReadMeeting: NewReadMeeting(readMeetingRepo)}
 }

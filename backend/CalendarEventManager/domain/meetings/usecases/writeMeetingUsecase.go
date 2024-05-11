@@ -8,29 +8,16 @@ import (
 )
 
 type WriteMeeting struct {
-	createRepo            respositories.WriteMeetingRepository
-	createMeetingZoomRepo respositories.ZoomApiRepository
+	createRepo respositories.WriteMeetingRepository
 }
 
-func NewCreateMeeting(createRepo respositories.WriteMeetingRepository, createMeetingZoomRepo respositories.ZoomApiRepository) *WriteMeeting {
+func NewCreateMeeting(createRepo respositories.WriteMeetingRepository) *WriteMeeting {
 	return &WriteMeeting{
-		createRepo:            createRepo,
-		createMeetingZoomRepo: createMeetingZoomRepo,
+		createRepo: createRepo,
 	}
 }
 
 func (usecase *WriteMeeting) CreateMeeting(meeting entities.Meetings) *entities.EventMeetingNotification {
-	token := usecase.createMeetingZoomRepo.GenerateAccessToken()
-	var meetingZoom entities.MeetingResponse = entities.MeetingResponse{
-		Topic:     meeting.Description,
-		Type:      2,
-		StartTime: meeting.MeetingDate.Format("2006-01-02T15:04:05"),
-		Duration:  int64(meeting.EventDuration),
-		Timezone:  "America/Bogota",
-		Agenda:    meeting.Title,
-	}
-	meetingZoomResponse := usecase.createMeetingZoomRepo.CreateZoomMeeting(token.AccessToken, "me", meetingZoom)
-	meeting.VideoConferenceLink = meetingZoomResponse.JoinURL
 	err := usecase.createRepo.CreateMeeting(meeting)
 	if err != nil {
 		log.Println(err)
@@ -43,9 +30,9 @@ func (usecase *WriteMeeting) CreateMeeting(meeting entities.Meetings) *entities.
 		Title:               meeting.Title,
 		Description:         meeting.Description,
 		EventDuration:       meeting.EventDuration,
-		VideoConferenceLink: meetingZoomResponse.JoinURL,
+		VideoConferenceLink: "",
 		UserID:              meeting.UserID,
-		ZoomMeetingId:       meetingZoomResponse.ID,
+		ZoomMeetingId:       654654654,
 	}
 	return &responseEventMeeting
 }

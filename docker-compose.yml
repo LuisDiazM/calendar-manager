@@ -16,20 +16,8 @@ services:
       - 5432:5432
     volumes:
       - ./volumes/postgres:/var/lib/postgresql/data
-  
-  pgadmin:
-    image: dpage/pgadmin4:6.14
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: luismigueldiazmorales@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 1232451fafr8
-    ports:
-      - 8083:80
-    volumes:
-      - ./volumes/pgadmin-data:/var/lib/pgadmin
-    depends_on: 
-      - dbpostgres
-  
+    network_mode: "host"  
+   
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
@@ -42,7 +30,7 @@ services:
     ports:
       - 5672:5672
       - 8082:15672
-  
+    network_mode: "host"  
   nosqlmongo:
     image: mongo:5.0
     restart: always
@@ -55,49 +43,28 @@ services:
       - 27017:27017
     volumes:
       - ./volumes/mongodb:/data/db
+    network_mode: "host"  
   
-  mongoexpress:
-    image: mongo-express:0.54.0
-    restart: always
-    mem_limit: 512m
-    cpus: 0.25
-    environment:
-      ME_CONFIG_BASICAUTH_USERNAME: luismigueldiazmorales
-      ME_CONFIG_BASICAUTH_PASSWORD: fjalkshfklahs
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: fhasgkr867fa654
-      ME_CONFIG_MONGODB_SERVER: nosqlmongo
-    ports:
-      - 8081:8081
-    depends_on: 
-      - nosqlmongo
 
-  calendar_notifications:
-    build: backend/calendarNotificationEvents/.
-    image: calendar-notification-events:v1
-    restart: always
-    mem_limit: 512m
-    cpus: 0.5
-    depends_on: 
-      - nosqlmongo
-      - rabbitmq
+  # calendar_notifications:
+  #   build: backend/calendarNotificationEvents/.
+  #   image: calendar-notification-events:v1
+  #   restart: always
+  #   mem_limit: 512m
+  #   cpus: 0.5
+  #   depends_on: 
+  #     - nosqlmongo
+  #     - rabbitmq
 
-  calendar_event_manager:
-    build: backend/CalendarEventManager/.
-    image: calendar-event-manager:v1
-    mem_limit: 512m
-    cpus: 0.5
-    restart: always
-    ports:
-      - 9090:9090
-    depends_on: 
-      - dbpostgres
-      - rabbitmq
+  # calendar_event_manager:
+  #   build: backend/CalendarEventManager/.
+  #   image: calendar-event-manager:v1
+  #   mem_limit: 512m
+  #   cpus: 0.5
+  #   restart: always
+  #   ports:
+  #     - 9090:9090
+  #   depends_on: 
+  #     - dbpostgres
+  #     - rabbitmq
 
-  build_angular_app:
-    build: frontend/calendar-manager-ui/.
-    image: builder-angular:v1
-    volumes:
-      - ./volumes/angular:/app/dist
-    ports:
-      - 4200:80

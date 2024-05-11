@@ -14,7 +14,6 @@ func CreateApp() *app.Application {
 		HTTPServerProvider,
 		DatabaseProvider,
 		BrokerProvider,
-		ZoomApiProvider,
 
 		UsersUsecasesProvider,
 		MeetingUsecaseProvider,
@@ -24,7 +23,6 @@ func CreateApp() *app.Application {
 		UsersRepositoryUpdateProvider,
 		MeetingRepositoryCreateProvider,
 		MeetRepositoryReadProvider,
-		ZoomMeetingRepositoryProvider,
 	)
 	return new(app.Application)
 }

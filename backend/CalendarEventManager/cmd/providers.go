@@ -5,8 +5,6 @@ import (
 	meetings "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom"
-	zoomRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom/meetings"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/app"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	meetingsRepo "github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database/meetings"
@@ -24,7 +22,6 @@ var HTTPServerProvider = wire.NewSet(server.NewHTTPServer)
 var DatabaseProvider = wire.NewSet(database.NewDatabaseImp)
 var AppProvider = wire.NewSet(app.NewApplication)
 var BrokerProvider = wire.NewSet(messaging.NewProducer)
-var ZoomApiProvider = wire.NewSet(zoom.NewZoomApi)
 
 // usecases
 var UsersUsecasesProvider = wire.NewSet(users.NewUsersUsecase)
@@ -36,4 +33,3 @@ var UsersRepositoryReaderProvider = wire.NewSet(usersRepo.NewUsersRepositoryRead
 var UsersRepositoryUpdateProvider = wire.NewSet(usersRepo.NewUsersRepositoryUpdate)
 var MeetingRepositoryCreateProvider = wire.NewSet(meetingsRepo.NewWriteMeetingRepository)
 var MeetRepositoryReadProvider = wire.NewSet(meetingsRepo.NewReadMeetingRepo)
-var ZoomMeetingRepositoryProvider = wire.NewSet(zoomRepo.NewZoomApiRepository)

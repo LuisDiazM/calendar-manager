@@ -3,6 +3,7 @@ package app
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/cmd/config"
 	meetingEntities "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/entities"
@@ -11,7 +12,6 @@ import (
 	meetings "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/meetings/usecases"
 	users "github.com/LuisDiazM/calendar-manager/calendar-event-manager/domain/users/usecases"
 
-	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/apis/zoom"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/database"
 	"github.com/LuisDiazM/calendar-manager/calendar-event-manager/infraestructure/messaging"
 	"github.com/gin-gonic/gin"
@@ -25,7 +25,6 @@ type Application struct {
 	UsersUsecase    *users.UsersUsecase
 	MeetingsUsecase *meetings.MeetingsUsecase
 	BrokerProducer  *messaging.RabbitProducer
-	ZoomAPI         *zoom.ZoomAPI
 }
 
 func NewApplication(configVars *config.Env,
@@ -33,8 +32,7 @@ func NewApplication(configVars *config.Env,
 	database database.DatabaseGateway,
 	usersUsecase *users.UsersUsecase,
 	meetingUsecase *meetings.MeetingsUsecase,
-	brokerProducer *messaging.RabbitProducer,
-	zoomApi *zoom.ZoomAPI) *Application {
+	brokerProducer *messaging.RabbitProducer) *Application {
 	return &Application{
 		Env:             configVars,
 		WebServer:       webServer,
@@ -42,7 +40,6 @@ func NewApplication(configVars *config.Env,
 		UsersUsecase:    usersUsecase,
 		MeetingsUsecase: meetingUsecase,
 		BrokerProducer:  brokerProducer,
-		ZoomAPI:         zoomApi,
 	}
 }
 
@@ -50,10 +47,11 @@ func (app *Application) Start(ctx context.Context) error {
 	g, _ := errgroup.WithContext(ctx)
 	g.Go(func() error {
 		app.Database.SetUp(*app.Env)
-		app.Migrations()
+		//app.Migrations()
 		if err := app.WebServer.Run(fmt.Sprintf(`:%d`, app.Env.SERVER_PORT)); err != nil {
 			return err
 		}
+		log.Println("application started!!")
 		return nil
 	})
 	return g.Wait()
